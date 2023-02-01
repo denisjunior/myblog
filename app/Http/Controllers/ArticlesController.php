@@ -16,7 +16,7 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles = Article::paginate(6);
-        return view('articles', [
+        return view('articles.articles', [
             'articles' => $articles
         ]);
     }
@@ -28,7 +28,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.addArticle');
     }
 
     /**
@@ -39,7 +39,15 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+            'title'=>'required',
+            'substile'=>'required',
+            'slug'=>'required',
+            'content'=>'required',
+         ]);
+       
+        Article::create($request->all());
+        return redirect('articles')->with('success', 'Article ajouter avec succès');
     }
 
     /**
@@ -50,7 +58,10 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::where('id', $id)->firstOrFail();
+        return view('articles.detailArticle',[
+            'article' => $article
+        ]);
     }
 
     /**
@@ -61,7 +72,8 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        return view('articles.editArticle')->with('articles', $article);
     }
 
     /**
@@ -73,7 +85,12 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::find($id);
+        $input = $request->all();
+        $article->update($input);
+
+        return  redirect('articles')->with('success', 'Article mis à jour!');
+
     }
 
     /**

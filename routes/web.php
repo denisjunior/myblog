@@ -1,8 +1,9 @@
 <?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticlesController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,23 +16,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('base');
-});
+Route::get('/', [ListController::class, 'index']);
 
-Route::resource('/articles', ArticlesController::class); 
+Route::get('/ajouter', function () {
+    return view('articles.addArticle');
+})->middleware('auth');
+
+
+
 
 Route::get('/test/{id}', [UserController::class, 'show']);
 
 
 Route::resource('users', UserController::class);
 
-Route::get('/env', function () {
-     dd(env('DB_DATABASE'));
-});
+ Route::prefix('user')->group(function(){
+    Route::resource('/articles', ArticlesController::class)->middleware('auth'); 
+ });
 
-Route::get('/articles/{id}/comments/{author?}', function ($id, $author = 'Teau') {
-    return $author."a écrit un commentaire sur l'article".$id;
-   
-});
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
