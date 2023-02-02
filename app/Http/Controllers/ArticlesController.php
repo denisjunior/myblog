@@ -48,7 +48,7 @@ class ArticlesController extends Controller
          ]);
        
         Article::create($request->all());
-        return redirect('/user/articles')->with('success', 'Article ajouter avec succès');
+        return redirect('articles')->with('success', 'Article ajouter avec succès');
     }
 
     /**
