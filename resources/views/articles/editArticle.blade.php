@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Modification</h4>
 
-                    <form action="{{ url('articles/' .$articles->id) }}" method="POST">    
+                    <form action="{{ url('/user/articles/' .$articles->id) }}" method="POST">    
                         @csrf
                         @method("PATCH")
                         <div class="form-group">

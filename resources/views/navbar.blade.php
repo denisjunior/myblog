@@ -22,7 +22,7 @@
             </ul>
             <form class="d-flex">
                 <input class="form-control me-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
             </form>
 
             @if (Auth::user())
@@ -33,6 +33,8 @@
             @else
                 <a href="{{route('login')}}" style="margin-left: 2%"> <button class="btn btn-danger"  type="submit">Se connecter</button></a>
             @endif
+
+            <a href="{{route('register')}}" style="margin-left: 1%"> <button  class="btn btn-light"  type="submit">S'inscrire</button></a>
 
         </div>
     </div>

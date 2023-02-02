@@ -40,7 +40,7 @@
                                 name="content" id="content" rows="3" />
                         </div>
 
-                        <a href="{{ url('/articles') }}">
+                        <a href="{{ url('/user/articles') }}">
                             <button style="margin-top: 2%" class="btn btn-info">Retour</button>
                         </a>
                     </form>

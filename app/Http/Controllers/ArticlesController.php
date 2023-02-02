@@ -15,6 +15,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
+        
         $articles = Article::paginate(6);
         return view('articles.articles', [
             'articles' => $articles
@@ -47,7 +48,7 @@ class ArticlesController extends Controller
          ]);
        
         Article::create($request->all());
-        return redirect('articles')->with('success', 'Article ajouter avec succès');
+        return redirect('/user/articles')->with('success', 'Article ajouter avec succès');
     }
 
     /**
@@ -89,7 +90,7 @@ class ArticlesController extends Controller
         $input = $request->all();
         $article->update($input);
 
-        return  redirect('articles')->with('success', 'Article mis à jour!');
+        return  redirect('/user/articles')->with('success', 'Article mis à jour!');
 
     }
 
@@ -101,6 +102,7 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::destroy($id);
+        return  redirect('/user/articles')->with('success', 'l article à bien été supprimer');
     }
 }

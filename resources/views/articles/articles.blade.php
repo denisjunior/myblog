@@ -20,9 +20,14 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->title }}</h5>
                             <p class="card-text">{{ $article->substile }}</p>
-                            <a href="{{ url('/articles/' . $article->id) }}" class="btn btn-primary">Voir plus</a>
-                            <a href="{{ url('/articles/' . $article->id . '/edit') }}" class="btn btn-info">Modifier</a>
-                            <a href="#" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ url('/user/articles/' . $article->id) }}" class="btn btn-primary">Voir plus</a>
+                            <a href="{{ url('/user/articles/' . $article->id . '/edit') }}" class="btn btn-info">Modifier</a>
+
+                            <form method="POST" action="{{ url('/user/articles' . '/' . $article->id) }}" accept-charset="UTF-8" style="display:inline">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Voulez vous supprimer cet article?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button>
+                            </form>
                         </div>
                     </div>
                 </div>
